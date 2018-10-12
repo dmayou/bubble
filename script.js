@@ -14,10 +14,9 @@ function bubbleSort (array, ascending) {
     console.log(`Iteration ${++iter} starting, ${array}`);
     swapOccurred = false; // init value for loop
     for (let i = 1; i < top; i++) {
-      if (array[i-1] > array[i]) {
-        let temp = array[i-1];
-        array[i-1] = array[i];
-        array[i] = temp;
+      if (( ascending && array[i-1] > array[i] ) ||
+        ( !ascending && array[i-1] < array[i] )) {
+        swap(array, i);
         swapOccurred = true;
       } // if
     } // for
@@ -26,4 +25,11 @@ function bubbleSort (array, ascending) {
   return array;
 }
 
-console.log(bubbleSort([20, 2, 4, 6, 8, 10, -6]));
+function swap(ar, ind) {
+// swaps value at index with value at index-1
+  let temp = ar[ind-1]
+  ar[ind-1] = ar[ind];
+  ar[ind] = temp;
+}
+
+console.log(bubbleSort([20, 2, 4, 6, 8, 10, -6], false));
