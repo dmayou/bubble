@@ -10,21 +10,33 @@ function parseStringToArray (str) {
   numArr = arr.filter(num => !Number.isNaN(num));
   displayInput(numArr);
   if (numArr.length > 1) {
-    console.log(bubbleSort(numArr, true));
+    let order = getAscending();
+    displayOutput(bubbleSort(numArr, order), order);
   } else {
     console.log('Need more than one number to sort.');
   }
 }
 
+function getAscending() {
+  // returns true unless descending radio button selected
+  let val = !document.getElementById('sort_down').checked;
+  console.log(val);
+  return val;
+}
+
 function displayInput(arr) {
-  // let div=document.getElementById('input');
-  // div.value = 'Hello World!';
  let inputDiv = document.getElementById('input');
- let whatUserEntered = document.createTextNode(`You entered ${arr.length} numbers:
-                          ${arr}`);
- // add the text node to the newly created div
+ let whatUserEntered = document.createTextNode(`You entered ${arr.length}
+                                                numbers:\n${arr}`);
  inputDiv.appendChild(whatUserEntered);
- inputDiv.value = 'Hello World!';
+}
+
+function displayOutput(arr, ascending) {
+  console.log(`In display output, ascending = ${ascending}`);
+  let outputDiv = document.getElementById('output');
+  let sortedOutput = document.createTextNode(`Your numbers sorted in
+                  ${ascending ? 'ascending' : 'descending'} order: ${arr}`);
+  outputDiv.appendChild(sortedOutput);
 }
 
 function bubbleSort (array, ascending) {
