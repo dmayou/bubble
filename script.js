@@ -1,4 +1,31 @@
-// Implement bubble sort on array
+// Allow user to input space separated numbers and choose sort order.
+// Perform bubble sort on array and output results.
+
+function getStringValue () {
+  parseStringToArray(document.getElementById('input_str').value);
+}
+
+function parseStringToArray (str) {
+  arr = str.split(' ').map(function(x){return parseInt(x, 10)});
+  numArr = arr.filter(num => !Number.isNaN(num));
+  displayInput(numArr);
+  if (numArr.length > 1) {
+    console.log(bubbleSort(numArr, true));
+  } else {
+    console.log('Need more than one number to sort.');
+  }
+}
+
+function displayInput(arr) {
+  // let div=document.getElementById('input');
+  // div.value = 'Hello World!';
+ let inputDiv = document.getElementById('input');
+ let whatUserEntered = document.createTextNode(`You entered ${arr.length} numbers:
+                          ${arr}`);
+ // add the text node to the newly created div
+ inputDiv.appendChild(whatUserEntered);
+ inputDiv.value = 'Hello World!';
+}
 
 function bubbleSort (array, ascending) {
   // Boolean ascending
