@@ -11,7 +11,7 @@ function parseStringToArray (str) {
   displayInput(numArr);
   if (numArr.length > 1) {
     let order = getAscending();
-    displayOutput(bubbleSort(numArr, order), order);
+    displayOutput(bubbleSort({array : numArr, ascending : order}), order);
   } else {
     console.log('Need more than one number to sort.');
   }
@@ -20,7 +20,6 @@ function parseStringToArray (str) {
 function getAscending() {
   // returns true unless descending radio button selected
   let val = !document.getElementById('sort_down').checked;
-  console.log(val);
   return val;
 }
 
@@ -29,17 +28,24 @@ function displayInput(arr) {
  inputDiv.textContent = `You entered ${arr.length} numbers:\n${arr}`;
 }
 
-function displayOutput(arr, ascending) {
+function displayOutput(object) {
   let outputDiv = document.getElementById('output');
   outputDiv.textContent = `Your numbers sorted in
-                      ${ascending ? 'ascending' : 'descending'} order: ${arr}`;
+                        ${object.ascending ? 'ascending' : 'descending'} order:
+                        ${object.sorted} by ${object.iterations} iteration${
+                          object.iterations === 1 ? '' : 's'}.`;
 }
 
-function bubbleSort (array, ascending) {
-  // Boolean ascending
+// function bubbleSort (array, ascending) {
+function bubbleSort (obj) {
+  // obj.array - array of at least two integers
+  // obj.ascending - boolean value
+  // obj.iterations - (return value) number of iterations to sort
+  // obj.sorted - array of sorted elements
   // array assumptions:
-  // - numeric or easily coerced
-  // - at least two elements
+
+  let ascending = obj.ascending;
+  let array = obj.array;
 
   let  swapOccurred = true;  // initial value to allow loop entry
 
@@ -53,11 +59,13 @@ function bubbleSort (array, ascending) {
         ( !ascending && array[i-1] < array[i] )) {
         swap(array, i);
         swapOccurred = true;
-      } // if
-    } // for
+      }
+    }
     top--; // one more element in sorted region per iteration
-  } // outer while
-  return array;
+  }
+  obj.sorted = array;
+  obj.iterations = iter;
+  return obj;
 }
 
 function swap(ar, ind) {
@@ -67,4 +75,4 @@ function swap(ar, ind) {
   ar[ind] = temp;
 }
 
-console.log(bubbleSort([20, 2, 4, 6, 8, 10, -6], false));
+//console.log(bubbleSort([20, 2, 4, 6, 8, 10, -6], false));
