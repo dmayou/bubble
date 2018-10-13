@@ -26,17 +26,13 @@ function getAscending() {
 
 function displayInput(arr) {
  let inputDiv = document.getElementById('input');
- let whatUserEntered = document.createTextNode(`You entered ${arr.length}
-                                                numbers:\n${arr}`);
- inputDiv.appendChild(whatUserEntered);
+ inputDiv.textContent = `You entered ${arr.length} numbers:\n${arr}`;
 }
 
 function displayOutput(arr, ascending) {
-  console.log(`In display output, ascending = ${ascending}`);
   let outputDiv = document.getElementById('output');
-  let sortedOutput = document.createTextNode(`Your numbers sorted in
-                  ${ascending ? 'ascending' : 'descending'} order: ${arr}`);
-  outputDiv.appendChild(sortedOutput);
+  outputDiv.textContent = `Your numbers sorted in
+                      ${ascending ? 'ascending' : 'descending'} order: ${arr}`;
 }
 
 function bubbleSort (array, ascending) {
